@@ -3,7 +3,6 @@ package main
 import (
 	"booking-app/sharedlib"
 	"fmt"
-	"strconv"
 	"strings"
 )
 
@@ -12,7 +11,14 @@ var conferenceName = "Go conference"
 const conferenceTickets = 50
 
 var remainingTickets uint = 50
-var bookingData =make([]map[string]string, 0)
+var bookingData =make([]ConfUser ,0)
+
+type ConfUser struct{
+	firstName string
+	lastName string
+	userEmail string
+	usertickets uint
+}
 
 func main() {
 
@@ -52,16 +58,19 @@ func makeBooking(userFirstName string, userLastName string, userEmail string, us
 	//storing booking data to a customer profile
 	//var bookingData = []string{}//slice
 	
-	var userData = make(map[string]string)
-	userData["FirstName"] = userFirstName
-	userData["LastName"] = userLastName
-	userData["Email"] = userEmail
-	userData["ticketsbooked"]=strconv.FormatUint(uint64(usertickets),10)
+	var userData = ConfUser{
+		firstName: userFirstName,
+		lastName: userLastName,
+		userEmail: userEmail,
+		usertickets: usertickets,
+	}
+
 	bookingData = append(bookingData, userData)
 
 	fmt.Printf("Thanks %v %v for booking %v ticket(s). The ticket will be emailed on %v \n", userFirstName, userLastName, usertickets, userEmail)
 	fmt.Printf("%v tickets remaining\n", remainingTickets)
 	fmt.Println("***************************************************")
+	fmt.Printf("List of bookings till now %v \n",bookingData)
 	return remainingTickets
 }
 func getuserdata() (string, string, string, uint) {
@@ -117,16 +126,10 @@ func publishBookingdata(){
 
 	for _,booking := range bookingData{
 
-		fmt.Printf("User %v booked %v tickets. \n",booking["FirstName"]+" "+booking["LastName"],booking["ticketsbooked"])
-		fmt.Printf("Ticket details will be emailed on %v \n",booking["Email"])
+		fmt.Printf("User %v booked %v tickets. \n",booking.firstName+" "+booking.lastName,booking.usertickets)
+		fmt.Printf("Ticket details will be emailed on %v \n",booking.userEmail)
 
 	}
 
 }
 
-/*func greetUser() {
-
-	fmt.Printf("Welcome to %v booking application \n", conferenceName)
-	fmt.Printf("We have a total of %v and %v tickets are still available \n", conferenceTickets, remainingTickets)
-	fmt.Println("Book your tickets with us now")
-}*/
