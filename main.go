@@ -11,8 +11,16 @@ var conferenceName = "Go conference"
 const conferenceTickets = 50
 
 var remainingTickets uint = 50
+//var confData = make([]ConferenceEvent, 0)
 var bookingData =make([]ConfUser ,0)
 
+/*
+type ConferenceEvent struct {
+	conferenceName srring
+	conferenceLocation string
+	conferenceTickets uint
+	remainingconfTickets uint
+}*/
 type ConfUser struct{
 	firstName string
 	lastName string
