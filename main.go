@@ -1,9 +1,10 @@
 package main
 
 import (
-	"fmt"
-	"strings"
 	"booking-app/sharedlib"
+	"fmt"
+	"strconv"
+	"strings"
 )
 
 var conferenceName = "Go conference"
@@ -11,6 +12,7 @@ var conferenceName = "Go conference"
 const conferenceTickets = 50
 
 var remainingTickets uint = 50
+var bookingData =make([]map[string]string, 0)
 
 func main() {
 
@@ -33,10 +35,11 @@ func main() {
 			} else if usertickets > remainingTickets {
 				fmt.Printf("Tickets unavailable for the required amount \n")
 			} else {
-				makeBooking(userFirstName, userLastName, userEmail, usertickets)
+				remainingTickets = makeBooking(userFirstName, userLastName, userEmail, usertickets,remainingTickets)
 			}
 
 		} else {
+			publishBookingdata()
 			break
 		}
 
@@ -44,11 +47,22 @@ func main() {
 
 }
 
-func makeBooking(userFirstName string, userLastName string, userEmail string, usertickets uint) {
+func makeBooking(userFirstName string, userLastName string, userEmail string, usertickets uint,remainingTickets uint) uint  {
 	remainingTickets -= usertickets
+	//storing booking data to a customer profile
+	//var bookingData = []string{}//slice
+	
+	var userData = make(map[string]string)
+	userData["FirstName"] = userFirstName
+	userData["LastName"] = userLastName
+	userData["Email"] = userEmail
+	userData["ticketsbooked"]=strconv.FormatUint(uint64(usertickets),10)
+	bookingData = append(bookingData, userData)
+
 	fmt.Printf("Thanks %v %v for booking %v ticket(s). The ticket will be emailed on %v \n", userFirstName, userLastName, usertickets, userEmail)
 	fmt.Printf("%v tickets remaining\n", remainingTickets)
-	fmt.Print("***************************************************")
+	fmt.Println("***************************************************")
+	return remainingTickets
 }
 func getuserdata() (string, string, string, uint) {
 
@@ -72,6 +86,8 @@ func getuserdata() (string, string, string, uint) {
 	return userFirstName, userLastName, userEmail, usertickets
 
 }
+
+
 func validateUserData(userFirstName string, userLastName string, userEmail string) (bool, string) {
 	var isvalid = false
 	var issue = ""
@@ -96,6 +112,16 @@ func validateUserData(userFirstName string, userLastName string, userEmail strin
 	}
 
 	return isvalid, issue
+}
+func publishBookingdata(){
+
+	for _,booking := range bookingData{
+
+		fmt.Printf("User %v booked %v tickets. \n",booking["FirstName"]+" "+booking["LastName"],booking["ticketsbooked"])
+		fmt.Printf("Ticket details will be emailed on %v \n",booking["Email"])
+
+	}
+
 }
 
 /*func greetUser() {
