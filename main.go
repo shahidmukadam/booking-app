@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"strings"
+	"booking-app/sharedlib"
 )
 
 var conferenceName = "Go conference"
@@ -19,7 +20,7 @@ func main() {
 	var usertickets uint
 	for {
 		if remainingTickets > 0 {
-			GreetUser()
+			explore.GreetUser(conferenceName, conferenceTickets , remainingTickets)
 
 			userFirstName, userLastName, userEmail, usertickets = getuserdata()
 			var isuserdatavalid, issue = validateUserData(userFirstName, userLastName, userEmail)
