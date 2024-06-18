@@ -19,7 +19,7 @@ func main() {
 	var usertickets uint
 	for {
 		if remainingTickets > 0 {
-			greetUser()
+			GreetUser()
 
 			userFirstName, userLastName, userEmail, usertickets = getuserdata()
 			var isuserdatavalid, issue = validateUserData(userFirstName, userLastName, userEmail)
@@ -97,9 +97,9 @@ func validateUserData(userFirstName string, userLastName string, userEmail strin
 	return isvalid, issue
 }
 
-func greetUser() {
+/*func greetUser() {
 
 	fmt.Printf("Welcome to %v booking application \n", conferenceName)
 	fmt.Printf("We have a total of %v and %v tickets are still available \n", conferenceTickets, remainingTickets)
 	fmt.Println("Book your tickets with us now")
-}
+}*/
