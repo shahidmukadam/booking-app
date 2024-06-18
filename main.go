@@ -36,7 +36,7 @@ func main() {
 	var usertickets uint
 	for {
 		if remainingTickets > 0 {
-			explore.GreetUser(conferenceName, conferenceTickets , remainingTickets)
+			sharedlib.GreetUser(conferenceName, conferenceTickets , remainingTickets)
 
 			userFirstName, userLastName, userEmail, usertickets = getuserdata()
 			var isuserdatavalid, issue = validateUserData(userFirstName, userLastName, userEmail)
@@ -140,4 +140,35 @@ func publishBookingdata(){
 	}
 
 }
+/*
+func secondmain() {
 
+	var userChoice string
+	for {
+		// greet the user and ask what the user wants to do 
+		fmt.Println("Welcome to the conference app ")
+		fmt.Println("What do you want to do ?")
+		fmt.Println("Press 1 to create a new conference ")
+		fmt.Println("Press 2 to book a ticket in an available conference")
+		fmt.Println("Press 3 to view booking details")
+		fmt.Scan(&userChoice)
+
+		// in case statement
+		switch userChoice {
+		case "1":
+			fmt.Println("1 pressed")
+		case "2":
+			fmt.Println("2 pressed")
+		case "3":
+			fmt.Println("3 pressed")
+		default : 
+		fmt.Println("Press a valid option")
+			
+		}
+		// Create a conference  - > Take input of the conference - > Validate and create
+		//book ticket in a conference -> show available conference - > book valid tickets and store booking data
+		// view conference booking details  - number of tickets booked and users who have booked tickets
+
+	}
+
+}

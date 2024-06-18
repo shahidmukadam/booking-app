@@ -1,4 +1,4 @@
-package explore
+package sharedlib
 
 import (
 "fmt"
