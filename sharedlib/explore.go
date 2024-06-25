@@ -4,9 +4,70 @@ import (
 "fmt"
 "strings"
 
+
 )
 
-func GreetUser(conferenceName string, conferenceTickets int ,remainingTickets uint) {
+type ConferenceEvent struct {
+	conferenceName string
+	conferenceLocation string
+	conferenceTickets uint
+	remainingconfTickets uint
+	Confeventuser []ConfUser
+
+}
+type ConfUser struct{
+	firstName string
+	lastName string
+	userEmail string
+	usertickets uint
+}
+
+func GreetConfCreator() string{
+var confname string
+	println("Enter the name of the conference")
+	fmt.Scan(&confname)
+	return confname
+}
+/*
+func publishBookingdata(){
+
+	for _,Booking := range BookingData{
+
+		fmt.Printf("User %v booked %v tickets. \n",booking.firstName+" "+booking.lastName,booking.usertickets)
+		fmt.Printf("Ticket details will be emailed on %v \n",booking.userEmail)
+
+	}
+
+}
+/*
+func ValidateConfName(confName string) bool {
+
+	var isconfnameValid = true
+			for _,conf := range ConfData {
+				if confName == conf.conferenceName {
+					isconfnameValid = false
+					return isconfnameValid
+				}
+
+}
+return isconfnameValid
+}
+*/
+/*
+func CreateConference(confname string){
+	var confdat = ConferenceEvent {
+		conferenceName: confname,
+
+	}
+	fmt.Println("Enter the location of the conference")
+	fmt.Scan(&confdat.conferenceLocation)
+	fmt.Println("Enter the number of ticekts in the conference")
+	fmt.Scan(&confdat.conferenceTickets)
+	confdat.remainingconfTickets=confdat.conferenceTickets
+	ConfData = append(ConfData, confdat)
+}
+*/
+func GreetUser(conferenceName string, conferenceTickets uint ,remainingTickets uint) {
 
 	fmt.Printf("Welcome to %v booking application \n", conferenceName)
 	fmt.Printf("We have a total of %v and %v tickets are still available \n", conferenceTickets, remainingTickets)
